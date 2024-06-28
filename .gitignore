@@ -33,4 +33,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Other
+.env
+
 # Exceptions
