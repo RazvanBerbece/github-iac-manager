@@ -14,7 +14,7 @@ env:
 
 jobs:
 
-  validate:
+  init-validate-plan:
     runs-on: ubuntu-latest
 
     steps:
