@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/tf-quality.yml
     secrets: inherit
 
-  continuous-deployment:
+  apply:
     environment: production
     needs: [continuous-integration]
     runs-on: ubuntu-latest
