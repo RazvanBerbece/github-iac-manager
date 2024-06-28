@@ -1,5 +1,4 @@
 locals {
-
   # New repositories are added to this list
   repositories_list = [
     {
@@ -21,8 +20,11 @@ locals {
       has_wiki        = false
     },
   ]
+}
 
-  # This shouldn't change, unless extra configuration values are added to the repositories above
+
+# This shouldn't change, unless extra configuration values are added to the repositories above
+locals {
   repositories_map = tomap({
     for repository in local.repositories_list :
     repository.name => {
