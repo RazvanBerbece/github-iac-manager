@@ -71,7 +71,7 @@ jobs:
             <details>
             <summary><h4>✅ Terraform Validation</h4></summary>
             ```
-            \'${{ steps.validate.outputs.stdout }}\'
+            \'${{ steps.validate.outcome }}\'
             ```
             </details>
 
@@ -79,7 +79,7 @@ jobs:
             <details>
             <summary><h4>Plan Output</h4></summary>
             ```
-            \'${{ steps.planStep.outputs.stdout }}\'
+            ${{ steps.planStep.outputs.stdout }}
             ```
             </details>
 
