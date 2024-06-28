@@ -56,15 +56,10 @@ jobs:
             ## Quality Check 
             🖌 Terraform Format and Style: \'${{ steps.fmt.outcome }}\'
             ⚙️ Terraform Initialization: \'${{ steps.init.outcome }}\'
-            ✅ Terraform Validation: \'${{ steps.validate.outcome }}\'
+            ✔️ Terraform Validation: \'${{ steps.validate.outcome }}\'
 
             ## Plan 
-            <details>
-            <summary><h4>Plan Output</h4></summary>
-            ```
-            ${{ steps.planStep.outputs.stdout }}
-            ```
-            </details>
+            📋 Check the plan output here: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
