@@ -1,0 +1,56 @@
+name: Deploy Terraform Infrastructure
+
+on:
+  push:
+    branches: [ 'main' ]
+    paths-ignore:
+      - '.github/**'
+      - 'README.md'
+      - '.gitignore'
+  workflow_dispatch:
+
+env:
+  TF_IN_AUTOMATION: "1"
+  TF_VAR_github_token: ${{ secrets.GH_TOKEN }} # repositories will be created under the user associated with this PAT
+
+jobs:
+
+  continuous-integration:
+    uses: ./.github/workflows/tf-quality.yml
+    secrets: inherit
+
+  continuous-deployment:
+    environment: production
+    needs: [continuous-integration]
+    runs-on: ubuntu-latest
+    if: needs.continuous-integration.result == 'success'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate next release number
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          default_bump: major
+          dry_run: true
+      
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        
+      - name: Run 'terraform init'
+        run: |
+          terraform init -input=false -upgrade
+      
+      - name: Run 'terraform apply'
+        run: |
+          terraform apply -input=false -auto-approve
+      
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
