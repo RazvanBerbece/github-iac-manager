@@ -56,23 +56,31 @@ jobs:
             ## Quality Check 
             <details>
             <summary><h4>🖌 Terraform Format and Style</h4></summary>
-            \`${{ steps.fmt.outputs.stdout }}\`
+            ```
+            ${{ steps.fmt.outcome }}
+            ```
             </details>
 
             <details>
             <summary><h4>⚙️ Terraform Initialization</h4></summary>
-            \`${{ steps.init.outputs.stdout }}\`
+            ```
+            ${{ steps.init.outcome }}
+            ```
             </details>
 
             <details>
             <summary><h4>✅ Terraform Validation</h4></summary>
-            \`${{ steps.validate.outputs.stdout }}\`
+            ```
+            ${{ steps.validate.outputs.stdout }}
+            ```
             </details>
 
             ## Plan 
             <details>
             <summary><h4>Plan Output</h4></summary>
-            \`${{ steps.planStep.outputs.stdout }}\`
+            ```
+            ${{ steps.planStep.outputs.stdout }}
+            ```
             </details>
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
