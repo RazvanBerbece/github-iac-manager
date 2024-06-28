@@ -56,23 +56,17 @@ jobs:
             ## Quality Check 
             <details>
             <summary><h4>🖌 Terraform Format and Style</h4></summary>
-            ```
-            ${{ steps.fmt.outcome }}
-            ```
+            \'${{ steps.fmt.outcome }}\'
             </details>
 
             <details>
             <summary><h4>⚙️ Terraform Initialization</h4></summary>
-            ```
-            ${{ steps.init.outcome }}
-            ```
+            \'${{ steps.init.outcome }}\'
             </details>
 
             <details>
             <summary><h4>✅ Terraform Validation</h4></summary>
-            ```
             \'${{ steps.validate.outcome }}\'
-            ```
             </details>
 
             ## Plan 
