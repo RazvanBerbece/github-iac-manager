@@ -35,17 +35,6 @@ locals {
       ]
     },
   ]
-
-  # Flatten the collaborator list so its map can be passed to github_repository_collaborator for each repository
-  flattened_collaborators = flatten([
-    for repository in local.repositories_list : [
-      for collaborator in repository.collaborators : {
-        repository_name = repository.name
-        username        = collaborator.username
-        permission      = collaborator.permission
-      }
-    ]
-  ])
 }
 
 
@@ -70,6 +59,17 @@ locals {
       enable_dependabot_updates   = repository.enable_dependabot_updates
     }
   })
+
+  # Flatten the collaborator list so its map can be passed to github_repository_collaborator for each repository
+  flattened_collaborators = flatten([
+    for repository in local.repositories_list : [
+      for collaborator in repository.collaborators : {
+        repository_name = repository.name
+        username        = collaborator.username
+        permission      = collaborator.permission
+      }
+    ]
+  ])
 
   collaborators_map = {
     for collaborator in local.flattened_collaborators :
