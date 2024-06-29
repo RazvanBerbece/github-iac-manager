@@ -18,3 +18,27 @@ resource "github_repository" "managed_repositories" {
   has_projects    = each.value.has_projects
   has_wiki        = each.value.has_wiki
 }
+
+resource "github_branch_protection" "managed_repositories_branch_protections" {
+  for_each = local.repositories_map
+
+  repository_id = each.key
+
+  pattern          = "main"
+  enforce_admins   = true
+  allows_deletions = false
+
+  require_conversation_resolution = true
+
+  allows_force_pushes  = each.value.allows_force_pushes
+  force_push_bypassers = each.value.force_push_bypassers
+}
+
+resource "github_repository_collaborator" "managed_repositories_collaborators" {
+  for_each = local.collaborators_map
+
+  repository = each.key
+
+  username   = each.value.username
+  permission = each.value.permission
+}
