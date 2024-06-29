@@ -14,7 +14,8 @@ locals {
 
       is_template = true
 
-      enable_dependabot_updates = true
+      enable_vulnerability_alerts = true
+      enable_dependabot_updates   = true
 
       has_issues      = true
       has_discussions = false
@@ -53,19 +54,20 @@ locals {
   repositories_map = tomap({
     for repository in local.repositories_list :
     repository.name => {
-      description               = repository.description
-      topics                    = repository.topics
-      visibility                = repository.visibility
-      gitignore_template        = repository.gitignore_template
-      delete_branch_on_merge    = repository.delete_branch_on_merge
-      is_template               = repository.is_template
-      has_issues                = repository.has_issues
-      has_discussions           = repository.has_discussions
-      has_projects              = repository.has_projects
-      has_wiki                  = repository.has_wiki
-      allows_force_pushes       = repository.allows_force_pushes
-      force_push_bypassers      = repository.force_push_bypassers
-      enable_dependabot_updates = repository.enable_dependabot_updates
+      description                 = repository.description
+      topics                      = repository.topics
+      visibility                  = repository.visibility
+      gitignore_template          = repository.gitignore_template
+      delete_branch_on_merge      = repository.delete_branch_on_merge
+      is_template                 = repository.is_template
+      has_issues                  = repository.has_issues
+      has_discussions             = repository.has_discussions
+      has_projects                = repository.has_projects
+      has_wiki                    = repository.has_wiki
+      allows_force_pushes         = repository.allows_force_pushes
+      force_push_bypassers        = repository.force_push_bypassers
+      enable_vulnerability_alerts = repository.enable_vulnerability_alerts
+      enable_dependabot_updates   = repository.enable_dependabot_updates
     }
   })
 
