@@ -32,6 +32,8 @@ resource "github_branch_protection" "managed_repositories_branch_protections" {
 
   allows_force_pushes  = each.value.allows_force_pushes
   force_push_bypassers = each.value.force_push_bypassers
+
+  depends_on = [github_repository.managed_repositories]
 }
 
 # One list of collaborators per managed repository
