@@ -47,4 +47,6 @@ resource "github_repository_collaborators" "managed_repositories_collaborators" 
       permission = each.value.permission
     }
   }
+
+  depends_on = [github_repository.managed_repositories]
 }
