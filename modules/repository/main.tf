@@ -52,3 +52,12 @@ resource "github_repository_collaborators" "managed_repositories_collaborators" 
 
   depends_on = [github_repository.managed_repositories]
 }
+
+resource "github_repository_dependabot_security_updates" "managed_repositories_dependabot_updates" {
+  for_each = local.repositories_map
+
+  repository = each.key
+  enabled    = each.value.enable_dependabot_updates
+
+  depends_on = [github_repository.managed_repositories]
+}
