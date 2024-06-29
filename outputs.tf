@@ -9,6 +9,6 @@ output "github_repositories_html_urls" {
 }
 
 output "collaborator_invitation_ids" {
-  value = module.repositories.collaborator_invitation_ids
+  value       = module.repositories.collaborator_invitation_ids
   description = "Invitation IDs of the collaborators added to the GitHub repositories managed by this resource"
 }
