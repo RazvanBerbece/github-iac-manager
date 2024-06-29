@@ -26,7 +26,7 @@ locals {
 
       collaborators = [
         {
-          username   = "RazvanBerbece"
+          username   = "ant-devbot"
           permission = "admin"
         }
       ]
