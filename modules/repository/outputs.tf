@@ -9,6 +9,6 @@ output "github_repositories_html_urls" {
 }
 
 output "collaborator_invitation_ids" {
-  value       = zipmap(values(github_repository.managed_repositories)[*].name, values(github_repository_collaborator.managed_repositories_collaborators)[*].invitation_id)
+  value       = zipmap(values(github_repository.managed_repositories)[*].name, values(github_repository_collaborators.managed_repositories_collaborators)[*].invitation_ids)
   description = "List of invitation IDs of the collaborators added to the GitHub repositories managed by this resource"
 }

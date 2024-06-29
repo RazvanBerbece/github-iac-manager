@@ -34,11 +34,17 @@ resource "github_branch_protection" "managed_repositories_branch_protections" {
   force_push_bypassers = each.value.force_push_bypassers
 }
 
-resource "github_repository_collaborator" "managed_repositories_collaborators" {
+# One list of collaborators per managed repository
+resource "github_repository_collaborators" "managed_repositories_collaborators" {
   for_each = local.collaborators_map
 
   repository = each.key
 
-  username   = each.value.username
-  permission = each.value.permission
+  dynamic "user" {
+    for_each = each.value
+    content {
+      username   = each.value.username
+      permission = each.value.permission
+    }
+  }
 }
