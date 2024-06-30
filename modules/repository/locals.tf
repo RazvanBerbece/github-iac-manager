@@ -3,7 +3,7 @@ locals {
   repositories_list = [
     {
       name        = "go_worker_template"
-      description = "A repository template for backend workers written in the Go language."
+      description = "A repository template for containerised backend workers written in the Go language. Comes with a containerised MySQL instance and various application layer boilerplates already written."
       topics      = ["golang", "ci", "worker", "docker", "cd"]
 
       visibility = "public"
