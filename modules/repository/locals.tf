@@ -34,6 +34,34 @@ locals {
         }
       ]
     },
+    {
+      name        = "go-htmx-playground"
+      description = "Playground for a server-rendered web application built with Go, HTMX and Templ."
+      topics      = ["golang", "htmx", "templ"]
+
+      visibility = "public"
+
+      gitignore_template = "Go" # name as found on https://github.com/github/gitignore
+
+      delete_branch_on_merge = true
+
+      is_template = false
+
+      enable_vulnerability_alerts = true
+      enable_dependabot_updates   = true
+
+      has_issues      = true
+      has_discussions = false
+      has_projects    = false
+      has_wiki        = false
+
+      allows_force_pushes = false
+      force_push_bypassers = [
+        "/RazvanBerbece"
+      ]
+
+      collaborators = []
+    },
   ]
 }
 
