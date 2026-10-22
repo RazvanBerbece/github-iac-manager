@@ -26,18 +26,18 @@ jobs:
     if: needs.continuous-integration.result == 'success'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Generate next release number
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
+        uses: mathieudutour/github-tag-action@v7.0.0
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           default_bump: major
           dry_run: true
       
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v4.0.1
         with:
           cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
         
@@ -50,7 +50,7 @@ jobs:
           terraform apply -input=false -auto-approve
       
       - name: Create GitHub release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.21.0
         with:
           token: ${{ secrets.GH_TOKEN }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
