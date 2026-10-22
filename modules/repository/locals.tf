@@ -2,6 +2,35 @@ locals {
   # New repositories are added to this list
   repositories_list = [
     {
+      name        = "TickerMaster"
+      description = "Stock-market research platform aggregating symbol data, investment ideas, and watchlists. Product design in progress."
+      topics      = ["stock-market", "market-data", "investment-research", "golang", "nodejs", "typescript", "react", "swift", "swiftui"]
+
+      visibility = "private"
+
+      # Leave the repository empty while the multi-language project is designed.
+      gitignore_template = null
+
+      delete_branch_on_merge = true
+
+      is_template = false
+
+      enable_vulnerability_alerts = true
+      enable_dependabot_updates   = true
+
+      has_issues      = true
+      has_discussions = false
+      has_projects    = false
+      has_wiki        = false
+
+      allows_force_pushes = false
+      force_push_bypassers = [
+        "/RazvanBerbece"
+      ]
+
+      collaborators = []
+    },
+    {
       name        = "go_worker_template"
       description = "A repository template for containerised backend workers written in the Go language. Comes with a containerised MySQL instance and various application layer boilerplates already written."
       topics      = ["golang", "ci", "worker", "docker", "cd"]
