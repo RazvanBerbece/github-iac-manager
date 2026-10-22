@@ -73,7 +73,7 @@ locals {
       description = "Playground for a server-rendered web application built with Go, HTMX and Templ."
       topics      = ["golang", "htmx", "templ"]
 
-      visibility = "public"
+      visibility = "private"
 
       gitignore_template = "Go" # name as found on https://github.com/github/gitignore
 
