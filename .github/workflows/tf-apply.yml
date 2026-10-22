@@ -1,4 +1,4 @@
-name: Deploy Terraform Infrastructure
+name: CD (Terraform)
 
 on:
   push:
@@ -12,6 +12,10 @@ on:
 env:
   TF_IN_AUTOMATION: "1"
   TF_VAR_github_token: ${{ secrets.GH_TOKEN }} # repositories will be created under the user associated with this PAT
+
+concurrency:
+  group: terraform-production
+  cancel-in-progress: false
 
 jobs:
 
@@ -44,11 +48,11 @@ jobs:
         
       - name: Run 'terraform init'
         run: |
-          terraform init -input=false -upgrade
+          terraform init -input=false -lockfile=readonly
       
       - name: Run 'terraform apply'
         run: |
-          terraform apply -input=false -auto-approve
+          terraform apply -input=false -auto-approve -no-color
       
       - name: Create GitHub release
         uses: ncipollo/release-action@v1.21.0
