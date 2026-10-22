@@ -1,4 +1,4 @@
-name: Deploy Terraform Infrastructure
+name: CD (Terraform)
 
 on:
   push:
@@ -13,6 +13,10 @@ env:
   TF_IN_AUTOMATION: "1"
   TF_VAR_github_token: ${{ secrets.GH_TOKEN }} # repositories will be created under the user associated with this PAT
 
+concurrency:
+  group: terraform-production
+  cancel-in-progress: false
+
 jobs:
 
   continuous-integration:
@@ -26,31 +30,32 @@ jobs:
     if: needs.continuous-integration.result == 'success'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Generate next release number
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
+        uses: mathieudutour/github-tag-action@v7.0.0
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           default_bump: major
           dry_run: true
       
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v4.0.1
         with:
+          terraform_version: "1.17.0"
           cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
         
       - name: Run 'terraform init'
         run: |
-          terraform init -input=false -upgrade
+          terraform init -input=false -lockfile=readonly
       
       - name: Run 'terraform apply'
         run: |
-          terraform apply -input=false -auto-approve
+          terraform apply -input=false -auto-approve -no-color
       
       - name: Create GitHub release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.21.0
         with:
           token: ${{ secrets.GH_TOKEN }}
           tag: ${{ steps.tag_version.outputs.new_tag }}

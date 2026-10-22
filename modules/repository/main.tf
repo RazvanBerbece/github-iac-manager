@@ -13,8 +13,6 @@ resource "github_repository" "managed_repositories" {
 
   is_template = each.value.is_template
 
-  vulnerability_alerts = each.value.enable_vulnerability_alerts
-
   has_issues      = each.value.has_issues
   has_discussions = each.value.has_discussions
   has_projects    = each.value.has_projects
@@ -55,11 +53,18 @@ resource "github_repository_collaborators" "managed_repositories_collaborators" 
   depends_on = [github_repository.managed_repositories]
 }
 
+resource "github_repository_vulnerability_alerts" "managed_repositories_vulnerability_alerts" {
+  for_each = local.repositories_map
+
+  repository = github_repository.managed_repositories[each.key].name
+  enabled    = each.value.enable_vulnerability_alerts
+}
+
 resource "github_repository_dependabot_security_updates" "managed_repositories_dependabot_updates" {
   for_each = local.repositories_map
 
   repository = each.key
   enabled    = each.value.enable_dependabot_updates
 
-  depends_on = [github_repository.managed_repositories]
+  depends_on = [github_repository_vulnerability_alerts.managed_repositories_vulnerability_alerts]
 }
