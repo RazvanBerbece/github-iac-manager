@@ -2,7 +2,7 @@ locals {
   # New repositories are added to this list
   repositories_list = [
     {
-      name        = "TickerMaster"
+      name        = "Tickervolt"
       description = "Stock-market research platform aggregating symbol data, investment ideas, and watchlists. Product design in progress."
       topics      = ["stock-market", "market-data", "investment-research", "golang", "nodejs", "typescript", "react", "swift", "swiftui"]
 
