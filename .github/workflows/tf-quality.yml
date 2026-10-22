@@ -45,6 +45,12 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
+      - name: Test personal repository policy
+        run: |
+          cp .terraform.lock.hcl modules/repository/.terraform.lock.hcl
+          terraform -chdir=modules/repository init -backend=false -input=false -lockfile=readonly
+          terraform -chdir=modules/repository test -no-color
+
       - name: Run 'terraform plan'
         id: planStep
         run: |
