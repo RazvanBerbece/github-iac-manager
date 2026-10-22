@@ -28,7 +28,12 @@ locals {
         "/RazvanBerbece"
       ]
 
-      collaborators = []
+      collaborators = [
+        {
+          username   = "ant-devbot"
+          permission = "admin"
+        }
+      ]
     },
     {
       name        = "go_worker_template"
