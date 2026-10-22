@@ -1,5 +1,7 @@
 locals {
-  # New repositories are added to this list
+  # Personal repositories on GitHub Free. Collaborators use the standard push role;
+  # organization-only roles such as admin are not supported for invitations here.
+  # New repositories are added to this list.
   repositories_list = [
     {
       name        = "Tickervolt"
@@ -31,7 +33,7 @@ locals {
       collaborators = [
         {
           username   = "ant-devbot"
-          permission = "admin"
+          permission = "push"
         }
       ]
     },
@@ -64,7 +66,7 @@ locals {
       collaborators = [
         {
           username   = "ant-devbot"
-          permission = "admin"
+          permission = "push"
         }
       ]
     },
@@ -125,7 +127,7 @@ locals {
       collaborators = [
         {
           username   = "ant-devbot"
-          permission = "admin"
+          permission = "push"
         }
       ]
     },

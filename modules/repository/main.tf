@@ -20,7 +20,11 @@ resource "github_repository" "managed_repositories" {
 }
 
 resource "github_branch_protection" "managed_repositories_branch_protections" {
-  for_each = local.repositories_map
+  # GitHub Free only supports branch protection on public repositories.
+  for_each = {
+    for name, repository in local.repositories_map : name => repository
+    if repository.visibility == "public"
+  }
 
   repository_id = each.key
 
@@ -43,10 +47,10 @@ resource "github_repository_collaborators" "managed_repositories_collaborators" 
   repository = each.key
 
   dynamic "user" {
-    for_each = each.value
+    for_each = [each.value]
     content {
-      username   = each.value.username
-      permission = each.value.permission
+      username   = user.value.username
+      permission = user.value.permission
     }
   }
 
