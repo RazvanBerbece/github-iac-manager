@@ -39,6 +39,7 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v4.0.1
         with:
+          terraform_version: "1.17.0"
           cli_config_credentials_token: ${{ secrets.HCP_TF_TOKEN }}
         
       - name: Run 'terraform init'
