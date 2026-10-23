@@ -22,7 +22,7 @@ locals {
 
       has_issues      = true
       has_discussions = false
-      has_projects    = false
+      has_projects    = true
       has_wiki        = false
 
       allows_force_pushes = false
